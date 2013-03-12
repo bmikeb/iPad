@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html"><!-- iPad Setup -->
+    <!--<meta http-equiv="cache-control" content="no-cache" />-->
+    <meta name="viewport" content="minimum-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <style>
+       .thumbnail  {
+           position: absolute;
+           border: solid 1px black;
+        }
+        .abs {
+            position: absolute;
+        }
+        .base {
+            position: absolute;
+            width: 1024px;
+            height: 768px;
+            /*overflow: hidden;*/
+        }
+        .captionContainer {
+            position: absolute;
+            margin-left:25px;
+            width: 90%;
+            height: 25px;
+            bottom: 25px;
+            background-color: #fff;
+            opacity: 0.4;
+            border-radius: 13px;
+            visibility: hidden;
+        }
+       .captionText{
+            position: absolute;
+            height: 20px;
+            top: 725px;
+            left: 155px;
+            width: 70%;
+            background: none;
+            border: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+        .hidden{
+            visibility: hidden;
+        }
+        .visible{
+            visibility: visible;
+        }
+       #sliderContainer{
+           overflow: hidden;
+           width:1024px;
+           height: 768px;
+           left: 0;
+           top: 0;
+           position: absolute;
+       }
+       #slider{
+           position: absolute;
+           left: 0;
+       }
+       .sliderSpot{
+           position: absolute;
+       }
+       #stars li{
+           margin:0;padding:0;
+           list-style:none;
+           position:absolute;
+           top:0;
+           height:21px;
+           width: 21px;
+           display: block;
+           background: url('img/star.gif') 0 0;
+       }
+       #caption{
+           position: absolute;
+           top:0;
+           width: 70%;
+           left: 150px;
+           text-align: center;
+           font-size: 20px;
+           height: 20px;
+       }
+    </style>
+    <script type="text/javascript" src="js-mag/jquery-1.8-min.js"></script>
+</head>
+
+<body style="margin: 0" onload="resumeState();">
+<input class="captionText" type="text">
+
+<div class="base" id="base"></div>
+<script type="text/javascript" src='js/gestures2.js'></script>
+<script type="text/javascript" src='js/slide.js'></script>
+</body>
+</html>
