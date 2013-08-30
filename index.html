@@ -4,9 +4,9 @@
 <head>
     <meta http-equiv="content-type" content="text/html"><!-- iPad Setup -->
     <!--<meta http-equiv="cache-control" content="no-cache" />-->
-    <meta name="viewport" content="minimum-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <!--<meta name="viewport" content="minimum-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no">-->
+    <!--<meta name="apple-mobile-web-app-capable" content="yes" />-->
+    <!--<meta name="apple-mobile-web-app-status-bar-style" content="default" />-->
 
     <style>
        .thumbnail  {
@@ -22,28 +22,7 @@
             height: 768px;
             /*overflow: hidden;*/
         }
-        .captionContainer {
-            position: absolute;
-            margin-left:25px;
-            width: 90%;
-            height: 25px;
-            bottom: 25px;
-            background-color: #fff;
-            opacity: 0.4;
-            border-radius: 13px;
-            visibility: hidden;
-        }
-       .captionText{
-            position: absolute;
-            height: 20px;
-            top: 725px;
-            left: 155px;
-            width: 70%;
-            background: none;
-            border: 0;
-            visibility: hidden;
-            z-index: 1000;
-        }
+
         .hidden{
             visibility: hidden;
         }
@@ -78,21 +57,85 @@
        #caption{
            position: absolute;
            top:0;
-           width: 70%;
-           left: 150px;
+           width: 600px;
+           left: 170px;
            text-align: center;
            font-size: 20px;
            height: 20px;
        }
+       .captionContainer {
+           position: absolute;
+           margin-left:25px;
+           width: 90%;
+           height: 25px;
+           bottom: 25px;
+           background-color: #fff;
+           opacity: 0.4;
+           border-radius: 13px;
+           visibility: visible;
+           /*visibility: hidden;*/
+           opacity:0
+       }
+       #captionInput{
+           position: absolute;
+           height: 20px;
+           top: 725px;
+           margin-left: 170px;
+           width: 650px;
+           background: none;
+           border: 0;
+           visibility: hidden;
+           z-index: 1000;
+       }
+       #previewPanel{
+           position: relative;
+           top: 20px;
+           margin-left: 3%;
+           margin-right: 3%
+       }
+       #previewPanel div{
+           padding: 2px;
+           float: left;
+           position: absolute;
+        }
+        .activeThumb{
+            width: 120px;
+            height: 90px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
+            /*position: absolute;*/
+        }
+       .currentThumb{
+           border: 2px solid #A00;
+           position: absolute;
+       }
+        div #LA{
+            margin-right: 20px;
+            margin-top: 20px
+        }
+        div #RA{
+            margin-left: 20px;
+        }
     </style>
-    <script type="text/javascript" src="js-mag/jquery-1.8-min.js"></script>
+    <script src="js/jquery-1.8-min.js"></script>
+    <script src="js/data.js"></script>
+	<script src="js/hand-1.0.6.js"></script>
+	<script src='js/gestures2.js'></script>
+    <script src='js/slide.js'></script>
+
+    <!--<script src="http://debug.phonegap.com/target/target-script-min.js#mikebb"></script>-->
 </head>
 
-<body style="margin: 0" onload="resumeState();">
-<input class="captionText" type="text">
+<body style="margin: 0" onload="resumeState()">
 
-<div class="base" id="base"></div>
-<script type="text/javascript" src='js/gestures2.js'></script>
-<script type="text/javascript" src='js/slide.js'></script>
+<input id="captionInput" type="text">
+
+<div id="base"></div>
+
+<div style="width:'1024px'">
+<div id="previewPanel"></div>
+</div>
+
+
+<!--<script src="js/combined.js"></script>-->
 </body>
 </html>
