@@ -1,8 +1,7 @@
 //(function($){
 //    $.fn.initGestures= function(){
 captionPanelClosed = true
-function transferCaptionInput() {
-}
+
 function initCaption(e, curX) {
     evt = e.originalEvent;
     var Y = e.pageY || evt.changedTouches[0].pageY;
@@ -33,16 +32,13 @@ function initGestures(/*arg*/){
     $this = $('body');
 
 //for iPad version
-//    $this.on('touchstart /*mousedown*/', touchStartHandler);
-//    $this.on('touchmove /*mousemove*/', touchMoveHandler);
+//    $this.on('touchstart', touchStartHandler);
+//    $this.on('touchmove', touchMoveHandler);
 //    $this.on('touchend /*mouseup*/', touchEndHandler);
 
   $this.on('mousedown', touchStartHandler);
     $this.on('mousemove', touchMoveHandler);
     $this.on('mouseup', touchEndHandler);
-
-//    detectHovering();
-
 
     function touchStartHandler(e) {
         e.preventDefault();
@@ -79,16 +75,6 @@ function initGestures(/*arg*/){
 
             if( new Date() - startTime>750){
                 adjusting = true;
-/*
-                if(startX<100 && startY<100 || startX>924 && startY>668){//corners only
-                    var ratio = 1+ deltaY/startImgH;
-                    img.css({width:startImgW*ratio+"px", height:startImgH*ratio+"px"});
-                }else{
-                    var accumX = startImgX + deltaX;
-                    var accumY = startImgY + deltaY;
-                    img.css({position:"relative", left: accumX+"px", top:accumY+"px"})
-                }
-*/
             }
         }
     };
@@ -99,8 +85,6 @@ function initGestures(/*arg*/){
 
 //for desktop only
        // tgt.trigger('click');
-
-        transferCaptionInput();
 
         if ( tgt.attr('id') != "undefined" && tgt.attr('id') != "captionContent" ) {
             console.log(tgt.attr('id'))
@@ -120,7 +104,6 @@ function initGestures(/*arg*/){
                     var e_parent = tgt[0].parentElement;
                     if (e_parent.className=='thumbnail') {
 
-//                                saveToStorage(ix);
                         displayBigThumb(e_parent.id);
 
                         localTrip = true;
