@@ -5,7 +5,7 @@
  localTrip = false, resumed = false;
  captionPanelOpened = false;
 
-function addStars(i) {
+function addStars() {
     var starsSelected = false,
     prevStars;
 
@@ -31,6 +31,7 @@ function addStars(i) {
             })
             .appendTo($('#stars'));
     }
+    starsSelected = false;
 }
 function previewsHandler() {
     for (var i = 0; i < thumbImages.length; i++) {
@@ -39,10 +40,7 @@ function previewsHandler() {
 
         $('<div><img src="img/thumbs/' + i + '.jpg"></div>')
             .css({left: 60 + (100 + GAP_P)* i + 'px'})
-            .on('touchstart', function(){
-
-            })
-		.on('mousedown', function () {
+		    .on('mousedown', function () {
             //.on('touchend', function () {
                 el = $(this);
                 dup = $(this).clone().appendTo(previewPanel)
@@ -83,29 +81,35 @@ function arrowsHandler(){
     RActx.beginPath(); LActx.moveTo(cw,0), LActx.lineTo(0,ch/2), LActx.lineTo(cw,ch);
     RActx.fillStyle = "4f4f4f";
     RActx.fill();
-}
-function handleCaptionText(){
-    $('body')
-        .on('click', function(e){
-            if(evt.pageY < 700)
-                return;
 
+    $('#LA #RA').on('click',  function (e){
+        if(e.originalEvent.pageX < 100){
+
+        }else{
+
+        }
+    })
+}
+
+function handleCaptionText(){
+    $('.captionContainer')
+        .on('click', function(e){
             e.originalEvent.stopPropagation();
             e.originalEvent.cancelBubble=true;
 
             if(captionPanelClosed){
                 $('#caption').show();
-                captionInput.css({visibility:'hidden'})
+                captionInput.hide()
             }else{
                 captionInput
                     .val( $("#caption").text() )//make text updateable
-                    .css({visibility:'visible'})
+                    .show()
                     .focus()
                     .on('keypress', function(e){
                         if(e.keyCode==13){
                             $('#caption').text( captionInput.val().trim() )
                                 .show()
-                            captionInput.css({visibility:'hidden'})
+                            captionInput.hide()
                         }
                     })
                 $('#caption').hide();
@@ -113,11 +117,7 @@ function handleCaptionText(){
     })
     captionPanelClosed = false;
 }
-function captionHandler() {
-    addStars();
 
-    starsSelected = false;
-}
 function resumeState(){
     IP = "testSite";
     CURR_USER = 'album.'+IP;
@@ -145,12 +145,13 @@ function resumeState(){
     html+='</div>';
     $('#base').html(html);
 
+
+    previewPnl = $("#previewPanel");
     slider = $('#slider');
     captionInput = $('#captionInput');
-    previewPnl = $("#previewPanel");
     caption = $('.captionContainer');
 
-    captionHandler();
+    addStars();
     previewsHandler();
 
     initGestures();
@@ -162,14 +163,15 @@ function resumeState(){
 
 function displaynext(shift){
 
-    if(shift!=0 || !resumed) saveToStorage(ix);
+    if(shift!=0 || !resumed)
+        saveToStorage(ix);
 
     var tgt = (shift) ? slider.children(":last") : slider.children(":first");
     var next = (shift) ? tgt.before(tgt.clone(true)) : tgt.after(tgt.clone(true));
 
     //before animation being invisible
     $(".thumbnail", next).remove();
-    $(".captionContainer", next).css({visibility: 'hidden'});
+    $(".captionContainer", next).css({visibility: 'hidden'});//for being animatable
 
     H_counter += Number(shift);
 
@@ -199,8 +201,9 @@ function displaynext(shift){
     });
 }
 function updateThumbPanel(ix){
-    $('#previewPanel > div').removeClass('currentThumb');
-    $('#previewPanel > div').eq(ix+1).addClass('currentThumb');//shift for arrow
+    $('#previewPanel > div')
+        .removeClass('currentThumb')
+        .eq(ix+1).addClass('currentThumb');//shift for arrow
 }
 function doCache(){
     var imgC = new Image();
